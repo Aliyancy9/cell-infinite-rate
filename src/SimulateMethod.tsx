@@ -1,32 +1,35 @@
 import { useState, useEffect } from "react"
-import { Line } from "react-chartjs-2"
-import getInfiniteRate from './method'
+import { Scatter } from "react-chartjs-2"
+import getInfiniteRate from './getInfiniteRate'
 
-const Math = () => {
+const Main = () => {
   const [chartData, setChartData] = useState({});
+  const testTimes = [0, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500]
 
-  const testTimes = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
+  const infinteRate1 = testTimes.map(x => {
+    return {x: x, y: getInfiniteRate(x, 0.8, 1) }
+  })
 
-  const infinteRate = testTimes.map(x => {
-    const rate = 2-1/x
-    if(rate< 0) return 0 
-    return rate.toFixed(3)
+  console.log('infinteRate1', infinteRate1)
+
+  const infinteRate2 = testTimes.map(x => {
+    return {x: x, y: getInfiniteRate(x, 0.6, 1) }
   })
 
   const chart = () => {
     setChartData({
-    labels: testTimes,
-    datasets: [
-      {
-        label: 'Survival rate f(x) = 2 - 1/x',
-        data: infinteRate,
-        fill: false,
-        borderColor: 'red',
-        borderWidth: 1,
-      }
-    ]
-    })
-  }
+      datasets: [{
+        label: 'survival rate(0.8)',
+        data: infinteRate1,
+        backgroundColor: 'red'
+    },
+    {
+      label: 'survival rate(0.6)',
+      data: infinteRate2,
+      backgroundColor: 'blue'
+    }]
+  })
+}
     
   const options = {
     responsive: true,
@@ -63,7 +66,8 @@ const Math = () => {
 
   return (  
     <div style={{height: '40rem', width: '60rem' }}>
-        <Line 
+
+        <Scatter
           data={chartData}
           options={options}
         />
@@ -71,4 +75,4 @@ const Math = () => {
   )
 }
 
-export default Math
+export default Main

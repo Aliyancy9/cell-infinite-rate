@@ -1,16 +1,14 @@
 import * as React from 'react'
-
-import Main from './Main'
-import Math from'./Math'
+import SimulateMethod from './SimulateMethod'
+import MathMethod from'./MathMethod'
 export class App extends React.Component {
   public render() {
       return ( 
         <div>
-        <Main />
-        <Math />
+          <SimulateMethod />
+          <MathMethod />
         </div>
-
       )
   }
 }
-export default App;
+export default App
