@@ -10,8 +10,6 @@ const Main = () => {
     return {x: x, y: getInfiniteRate(x, 0.8, 1) }
   })
 
-  console.log('infinteRate1', infinteRate1)
-
   const infinteRate2 = testTimes.map(x => {
     return {x: x, y: getInfiniteRate(x, 0.6, 1) }
   })
